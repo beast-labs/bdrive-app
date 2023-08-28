@@ -7,7 +7,7 @@ interface HomeLayoutProps {
 const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   return (
     <div>
-      <h1>Welcome to Home</h1>
+      <h1>Home Nav Bar</h1>
       {children}
     </div>
   );

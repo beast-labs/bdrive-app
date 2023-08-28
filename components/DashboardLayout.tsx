@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div>
-      <h1>Welcome to Dashboard</h1>
+      <h1>Dashboard Nav Bar</h1>
       {children}
     </div>
   );
