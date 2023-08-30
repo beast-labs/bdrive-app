@@ -1,6 +1,7 @@
 import React from 'react';
 import './globals.css'
 import HomeLayout from '../components/HomeLayout';
+import Navbar from '@/components/Navbar';
 
 const HomePage: React.FC = () => {
   return (

@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Navbar from './Navbar';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -6,10 +7,13 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
+    <>
+    <Navbar/>
     <div>
-      <h1>Dashboard Nav Bar</h1>
+      <h1> Dashboard : Breadcrumbs Text</h1>
       {children}
     </div>
+    </>
   );
 };
 

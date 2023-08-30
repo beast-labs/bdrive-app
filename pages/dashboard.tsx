@@ -1,6 +1,7 @@
 import React from 'react';
 import './globals.css'
 import DashboardLayout from '../components/DashboardLayout';
+import Navbar from '@/components/Navbar';
 
 const DashboardPage: React.FC = () => {
   return (
