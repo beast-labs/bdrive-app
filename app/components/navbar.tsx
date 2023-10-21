@@ -1,6 +1,6 @@
 import React from "react"
-
 import Link from "next/link";
+
 export default function Navbar() {
   return (
     <nav className="relative flex w-full flex-wrap items-center bg-gray-900 text-white py-3 px-3 shadow-lg lg:flex-wrap lg:justify-start">
