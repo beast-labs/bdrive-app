@@ -11,7 +11,14 @@ export default function AuthForm() {
   return (
     <Auth
       supabaseClient={supabase}
-      appearance={{ theme: ThemeSupa }}
+      appearance={{ theme: ThemeSupa,
+        style: {
+          button: {  color: 'black' },
+          anchor: { color: 'white' },
+          input: {color:'white'},
+          //..
+        }
+      }}
       providers={['google']}
       redirectTo="http://localhost:3000/auth/callback"
     />

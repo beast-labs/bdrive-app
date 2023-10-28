@@ -32,8 +32,12 @@ button:hover{
 }
 td{
   padding: 4px;
+  
+}
+td:hover{
+  /* background-color: rgba(255, 255, 255, 0.122); */
 }
 /* tr:hover{
   border-radius: 0.375rem;
-  background-color: rgb(146, 182, 216);
+  background-color: rgba(146, 182, 216, 0.675);
 } */
