@@ -2,6 +2,8 @@ import Table from "../components/table";
 import { Session, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { cookies } from 'next/headers'
+import { useState } from "react";
+import Upload from "../components/file-upload";
 
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
 export default async function Page() {
@@ -13,28 +15,39 @@ export default async function Page() {
   } = await supabase.auth.getSession()
   console.log(session)
 
+  
+
     return (
-      <section className="bg-gray-900 text-white">
-            <div
-                className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
-            >
-                <div className="mx-auto max-w-3xl">
+      <section className="bg-gray-900 h-screen text-white">
+            <div className="flex py-5 items-center justify-center">
+                <div className="outline">
                 <h1
                     className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
                 >
                     Dashboard
                 </h1>
-                <div className="flex items-center outline justify- p-5">
+                <div className="flex items-center justify-center p-2">
                   <form action="/auth/signout" method="post">
                       <button className="button p-2 bg-red-600 rounded-md text-white" type="submit">
                         Sign out
                       </button>
                     </form>
                 </div>
-                <div className="flex items-center outline justify-between min-w-full"> <Table/></div>
-                </div>
-                
+                </div>    
             </div>
+            <div>
+
+            </div>
+            <div className="flex flex-col items-center justify-between">
+              <div>
+                 <Upload/>   
+              </div> 
+              <div>
+              <Table session={session}/> 
+              </div>              
+                  
+            </div>
+            
         </section>
     // <main className="flex min-h-screen outline flex-col items-center justify-between p-16">
     //   <div className="flex items-center outline justify-between p-16 ">
