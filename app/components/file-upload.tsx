@@ -40,7 +40,7 @@ export default function Upload() {
         }
     }
   return(
-    <div>
+    <div className='flex items-center justify-center space-x-4'>
         {/* <label className="button primary block" htmlFor="single">
           {uploading ? 'Uploading ...' : 'Upload'}
         </label> 
@@ -55,10 +55,13 @@ export default function Upload() {
           onChange={uploadAvatar}
           disabled={uploading}
         />*/}
-        <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:outline hover:bg-white/[0.1] p-3">
-                  <span>Upload a file</span>
-                  <input id="file-upload" name="file-upload" type="file" className="sr-only"/>
-                </label>
+        <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
+            <span>Select a file</span>
+            <input id="file-upload" name="file-upload" type="file" className="sr-only"/>
+        </label>
+        <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
+            <span>Upload</span>
+        </button>
 
     </div>
   )

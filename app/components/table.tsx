@@ -15,7 +15,7 @@ export default function Table({ session }: { session: Session | null }){
         </tr>
       );
     return(
-        <div className="bg-transparent p-4 rounded-md m-4 inline-block flex w-full shadow">
+        <div className="bg-transparent p-4 rounded-md inline-block flex w-full shadow">
             <table className="table-auto w-full items-center rounded-md outline">
                 <thead className='border-b-2 border-neutral-300'>
                     <tr>
