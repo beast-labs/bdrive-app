@@ -10,56 +10,47 @@ export default function Upload() {
 
 
     const supabase = createClientComponentClient<Database>()
-
     const [uploading, setUploading] = useState(false)
+    const [fileSelected, setfileSelected] = useState(false)
 
 
-    const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+    const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      const button: HTMLButtonElement = event.currentTarget;
+      if(!fileSelected){
+        alert('no file is selected.')
+      }
+      //setfileSelected(true);
+    };
+    
+    const uploadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
         try {
         setUploading(true)
 
         if (!event.target.files || event.target.files.length === 0) {
             throw new Error('You must select an image to upload.')
         }
-
+        
         const file = event.target.files[0]
         const fileExt = file.name.split('.').pop()
         const filePath = `${33}-${Math.random()}.${fileExt}`
-
-        const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
-
-        if (uploadError) {
-            throw uploadError
-        }
-
+        setfileSelected(true)
+        //const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
         // onUpload(filePath)
         } catch (error) {
-        alert('Error uploading avatar!')
+        alert('Error selecting file to upload!')
         } finally {
         setUploading(false)
         }
     }
   return(
     <div className='flex items-center justify-center space-x-4'>
-        {/* <label className="button primary block" htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Upload'}
-        </label> 
-        <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
-          type="file"
-          id="single"
-          accept="image/*"
-          onChange={uploadAvatar}
-          disabled={uploading}
-        />*/}
         <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
             <span>Select a file</span>
-            <input id="file-upload" name="file-upload" type="file" className="sr-only"/>
+            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={uploadFile}/>
         </label>
-        <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
+        <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3"
+        onClick={buttonHandler}>
             <span>Upload</span>
         </button>
 
