@@ -39,6 +39,8 @@ export interface Database {
           inserted_at: string
           is_complete: boolean | null
           task: string | null
+          file_name: string | null
+          file_size: number | null
           user_id: string
         }
         Insert: {

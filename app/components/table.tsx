@@ -2,7 +2,7 @@
 import { files } from './data.js';
 import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -10,11 +10,12 @@ export default function Table({ session }: { session: Session | null }){
 
     const user = session?.user
     const supabase = createClientComponentClient<Database>()
-    const listFiles = files.map(file =>
-        <tr className='hover:bg-gray-100/50 text-center' key={file.id}>
-            <td>{file.name}</td>
-            <td>{file.upload_date}</td>
-            <td>{file.size} KB</td>
+    const [todos, setTodos] = useState<Todos[]>([])
+    const listFiles = todos.map(file =>
+        <tr className='hover:bg-gray-100/50 text-center' key={file.user_id}>
+            <td>{file.file_name}</td>
+            <td>{file.inserted_at}</td>
+            <td>{file.file_size} KB</td>
             
         </tr>
       );
@@ -29,7 +30,7 @@ export default function Table({ session }: { session: Session | null }){
           if (error) console.log('error', error)
           else {
             console.log("Todos: "+todos)
-            //setTodos(todos)
+            setTodos(todos)
           }
         }
     
