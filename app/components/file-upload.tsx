@@ -47,6 +47,7 @@ export default function Upload({ session }: { session: Session | null }) {
         }
       }
     }
+    
     const uploadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
         try {
         setUploading(true)

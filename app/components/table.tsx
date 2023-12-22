@@ -11,12 +11,24 @@ export default function Table({ session }: { session: Session | null }){
     const user = session?.user
     const supabase = createClientComponentClient<Database>()
     const [todos, setTodos] = useState<Todos[]>([])
+
+    const deleteTodo  = async(file_id: number) => {
+      try {
+        await supabase
+          .from('todos')
+          .delete()
+          .eq('id', file_id )
+          
+      } catch (error) {
+        console.log('error', error)
+      }
+    }
     const listFiles = todos.map(file =>
         <tr className='hover:bg-gray-100/50 text-center' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{file.file_size} KB</td>
-            <td> <button> Delete</button></td>
+            <td> <button onClick={e => deleteTodo(file.id)}> Delete</button></td>
             
         </tr>
       );
