@@ -1,9 +1,10 @@
 import Table from "../components/table";
-import { Session,createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { cookies } from 'next/headers'
 import { useState } from "react";
 import Upload from "../components/file-upload";
+import { useSession } from "@supabase/auth-helpers-react";
 
 
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL

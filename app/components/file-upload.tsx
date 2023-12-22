@@ -57,7 +57,7 @@ export default function Upload({ session }: { session: Session | null }) {
         
         const file = event.target.files[0]
         const fileExt = file.name.split('.').pop()
-        const filePath = `${33}-${Math.random()}.${fileExt}`
+        const filePath = `${file.name}`
         setFileSize(file.size)
         setFileName(filePath)
         setfileSelected(true)

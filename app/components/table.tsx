@@ -1,6 +1,6 @@
 'use client'
-import { files } from './data.js';
-import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Session, createClientComponentClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import {useSupabaseClient} from '@supabase/auth-helpers-react'
 import { Database } from '../../supabase'
 import { useEffect, useState } from 'react';
 
@@ -16,6 +16,7 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{file.file_size} KB</td>
+            <td> <button> Delete</button></td>
             
         </tr>
       );
@@ -36,7 +37,7 @@ export default function Table({ session }: { session: Session | null }){
     
         fetchTodos()
         
-      }, [supabase])
+      }, [supabase,todos])
       
     return(
         <div className="bg-transparent p-4 rounded-md inline-block flex w-full shadow">
@@ -46,6 +47,7 @@ export default function Table({ session }: { session: Session | null }){
                     <th>File Name</th>
                     <th>Upload Date</th>
                     <th>Size</th>
+                    <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
