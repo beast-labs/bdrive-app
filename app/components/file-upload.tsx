@@ -44,7 +44,7 @@ export default function Upload({ session }: { session: Session | null }) {
           console.log(error.message)
         } else {
           setTodos([...todos, todo])
-          //setNewTaskText('')
+          setfileSelected(false)
           console.log(todo)
         }
       }

@@ -41,15 +41,6 @@ export default function Table({ session }: { session: Session | null }){
         console.log('Error downloading image: ', error)
       }
     }
-    const blobToFile = (theBlob: Blob, fileName:string): File => {
-      const b: any = theBlob;
-      //A Blob() is almost a File() - it's just missing the two properties below which we will add
-      b.lastModifiedDate = new Date();
-      b.name = fileName;
-        
-      //Cast to a File() type
-      return theBlob as File;
-    }
 
     const deleteTodo  = async(file_id: number, file_name: string) => {
       try {
@@ -74,10 +65,9 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.inserted_at}</td>
             <td>{file.file_size} KB</td>
             <td>
-              <form action="/api/download/dummy.pdf" method="get">
-                <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
-                
-                <button formAction={'/api/download/'+file.file_name} id='download' type='submit'> Download</button>
+              <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
+              <form action={"/api/download/"+file.file_name} method="get">              
+                <button id='download' type='submit'> Down</button>
               </form>
             </td>
             
