@@ -25,8 +25,10 @@ export default function Upload({ session }: { session: Session | null }) {
       if(!fileSelected){
         alert('no file is selected.')
       }
-      //setfileSelected(true);
-      addTodo("Hello")
+      else if(fileSelected){
+        addTodo("Hello")
+      }
+      
     };
     const addTodo = async (taskText: string) => {
       let task = taskText.trim()

@@ -3,6 +3,9 @@ import { Session, createClientComponentClient, createServerComponentClient } fro
 import {useSupabaseClient} from '@supabase/auth-helpers-react'
 import { Database } from '../../supabase'
 import { useEffect, useState } from 'react';
+import fs from 'fs/promises';
+import Download from './download';
+import Link from 'next/link';
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -11,6 +14,42 @@ export default function Table({ session }: { session: Session | null }){
     const user = session?.user
     const supabase = createClientComponentClient<Database>()
     const [todos, setTodos] = useState<Todos[]>([])
+
+    const downloadTodo = async(file_name:string) => {
+      try {
+        const { data, error } = await supabase.storage.from('avatars').download(file_name)
+        console.log("Data : "+data)
+        const url = URL.createObjectURL(data)
+        console.log("File URL : "+url)
+        const downloadLink = document.createElement('a')
+        
+        downloadLink.href = url
+        document.body.appendChild(downloadLink);
+        downloadLink?.click()
+        downloadLink.download = file_name
+        downloadLink.target = "_blank"
+        document.body.removeChild(downloadLink)
+        // await fs.writeFile("name", buffer);
+        // const buffer = Buffer.from(await data.arrayBuffer());
+        // console.log("File Buffer :"+buffer.toJSON())
+        // await fs.writeFile("/", buffer);
+        console.log(`File downloaded to`);
+        if (error) {
+          throw error
+        }
+      }catch (error) {
+        console.log('Error downloading image: ', error)
+      }
+    }
+    const blobToFile = (theBlob: Blob, fileName:string): File => {
+      const b: any = theBlob;
+      //A Blob() is almost a File() - it's just missing the two properties below which we will add
+      b.lastModifiedDate = new Date();
+      b.name = fileName;
+        
+      //Cast to a File() type
+      return theBlob as File;
+    }
 
     const deleteTodo  = async(file_id: number, file_name: string) => {
       try {
@@ -34,7 +73,13 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{file.file_size} KB</td>
-            <td> <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button></td>
+            <td>
+              <form action="/api/download/dummy.pdf" method="get">
+                <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
+                
+                <button formAction={'/api/download/'+file.file_name} id='download' type='submit'> Download</button>
+              </form>
+            </td>
             
         </tr>
       );
