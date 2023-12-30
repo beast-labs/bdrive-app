@@ -24,18 +24,24 @@ type GetParams = {
 
     //get the file from supabase
     const { data, error } = await supabase.storage.from('avatars').download(filename)
-        console.log("Data : "+data)
+    if (error){
+      console.log("Error Downloading File "+filename+" \nError"+error)
+    }
+    else{
+      console.log("Data : "+data)
         const url = URL.createObjectURL(data)
         console.log("File URL : "+url)
 
-    // use fetch to get a response
-    const response = await fetch(url);
-  
-    // return a new response but use 'content-disposition' to suggest saving the file to the user's computer
-    return new Response(response.body, {
-      headers: {
-        ...response.headers, // copy the previous headers
-        "content-disposition": `attachment; filename="${filename}"`,
-      },
-    });
+      // use fetch to get a response
+      const response = await fetch(url);
+    
+      // return a new response but use 'content-disposition' to suggest saving the file to the user's computer
+      return new Response(response.body, {
+        headers: {
+          ...response.headers, // copy the previous headers
+          "content-disposition": `attachment; filename="${filename}"`,
+        },
+      });
+    }
+        
   }

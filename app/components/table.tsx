@@ -1,11 +1,7 @@
 'use client'
-import { Session, createClientComponentClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import {useSupabaseClient} from '@supabase/auth-helpers-react'
+import { Session, createClientComponentClient} from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { useEffect, useState } from 'react';
-import fs from 'fs/promises';
-import Download from './download';
-import Link from 'next/link';
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
