@@ -27,15 +27,19 @@ export default function Upload({ session }: { session: Session | null }) {
       }
       else if(fileSelected){
         addTodo("Hello")
+        setfileSelected(false)
       }
       
     };
     const addTodo = async (taskText: string) => {
       let task = taskText.trim()
       if (task.length) {
+        let time = new Date().toLocaleTimeString()
+        let date = new Date().toLocaleDateString()
+        // let time = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" - "+date.getHours()+":"+date.getMinutes()
         const { data: todo, error } = await supabase
           .from('todos')
-          .insert({user_id: user.id, file_name: fileName, file_size: fileSize })
+          .insert({user_id: user.id, file_name: fileName, file_size: fileSize , inserted_at:date+" "+time})
           .select()
           .single()
   
@@ -44,7 +48,6 @@ export default function Upload({ session }: { session: Session | null }) {
           console.log(error.message)
         } else {
           setTodos([...todos, todo])
-          setfileSelected(false)
           console.log(todo)
         }
       }

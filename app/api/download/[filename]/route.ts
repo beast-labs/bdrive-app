@@ -9,7 +9,7 @@ type GetParams = {
   };
   
   // export an async GET function. This is a convention in NextJS
-  export async function GET(req: Request, { params }: GetParams) {
+  export async function GET(req: NextRequest, { params }: GetParams) {
 
     const cookieStore = cookies()
     const supabase = createRouteHandlerClient({ cookies: () => cookieStore })

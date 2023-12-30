@@ -66,7 +66,7 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_size} KB</td>
             <td>
               <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
-              <form action={"/api/download/"+file.file_name} method="get">              
+              <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
                 <button id='download' type='submit'> Down</button>
               </form>
             </td>
