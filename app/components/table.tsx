@@ -7,36 +7,8 @@ type Todos = Database['public']['Tables']['todos']['Row']
 
 export default function Table({ session }: { session: Session | null }){
 
-    const user = session?.user
     const supabase = createClientComponentClient<Database>()
     const [todos, setTodos] = useState<Todos[]>([])
-
-    const downloadTodo = async(file_name:string) => {
-      try {
-        const { data, error } = await supabase.storage.from('avatars').download(file_name)
-        console.log("Data : "+data)
-        const url = URL.createObjectURL(data)
-        console.log("File URL : "+url)
-        const downloadLink = document.createElement('a')
-        
-        downloadLink.href = url
-        document.body.appendChild(downloadLink);
-        downloadLink?.click()
-        downloadLink.download = file_name
-        downloadLink.target = "_blank"
-        document.body.removeChild(downloadLink)
-        // await fs.writeFile("name", buffer);
-        // const buffer = Buffer.from(await data.arrayBuffer());
-        // console.log("File Buffer :"+buffer.toJSON())
-        // await fs.writeFile("/", buffer);
-        console.log(`File downloaded to`);
-        if (error) {
-          throw error
-        }
-      }catch (error) {
-        console.log('Error downloading image: ', error)
-      }
-    }
 
     const deleteTodo  = async(file_id: number, file_name: string) => {
       try {
@@ -55,11 +27,18 @@ export default function Table({ session }: { session: Session | null }){
         console.log('error', error)
       }
     }
+
+    function bytesToSize(bytes:number) {
+      var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      if (bytes == 0) return '0 Byte';
+      var i = Math.floor(Math.log(bytes) / Math.log(1024));
+      return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
+   }
     const listFiles = todos.map(file =>
         <tr className='hover:bg-gray-100/50 text-center' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
-            <td>{file.file_size} KB</td>
+            <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
             <td>
               <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
@@ -79,7 +58,6 @@ export default function Table({ session }: { session: Session | null }){
     
           if (error) console.log('error', error)
           else {
-            console.log("Todos: "+todos)
             setTodos(todos)
           }
         }

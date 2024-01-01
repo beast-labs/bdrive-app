@@ -1,13 +1,11 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Database } from '../../supabase'
 import {  Session,createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import Image from 'next/image'
 type Files = Database['public']['Tables']['files']['Row']
 type Todos = Database['public']['Tables']['todos']['Row']
 
 export default function Upload({ session }: { session: Session | null }) {
-
 
     const supabase = createClientComponentClient<Database>()
     const [uploading, setUploading] = useState(false)
@@ -36,7 +34,6 @@ export default function Upload({ session }: { session: Session | null }) {
       if (task.length) {
         let time = new Date().toLocaleTimeString()
         let date = new Date().toLocaleDateString()
-        // let time = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" - "+date.getHours()+":"+date.getMinutes()
         const { data: todo, error } = await supabase
           .from('todos')
           .insert({user_id: user.id, file_name: fileName, file_size: fileSize , inserted_at:date+" "+time})
@@ -44,7 +41,6 @@ export default function Upload({ session }: { session: Session | null }) {
           .single()
   
         if (error) {
-          //setErrorText(error.message)
           console.log(error.message)
         } else {
           setTodos([...todos, todo])
@@ -71,8 +67,6 @@ export default function Upload({ session }: { session: Session | null }) {
         if (uploadError) {
           throw uploadError
         }
-  
-      
         } catch (error) {
         alert('Error selecting file to upload!')
         } finally {
