@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { Database } from '../../supabase'
 import {  Session,createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { prototype } from 'events'
+import { error } from 'console'
 type Files = Database['public']['Tables']['files']['Row']
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -16,7 +18,6 @@ export default function Upload({ session }: { session: Session | null }) {
 
     const user = session?.user
 
-
     const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       const button: HTMLButtonElement = event.currentTarget;
@@ -24,8 +25,14 @@ export default function Upload({ session }: { session: Session | null }) {
         alert('no file is selected.')
       }
       else if(fileSelected){
-        addTodo("Hello")
-        setfileSelected(false)
+        if(fileSize > 2097152){
+          alert("File is too big! Max File Size : 2 MB!")
+        }
+        else{
+          addTodo("Hello")
+          setfileSelected(false)
+        }
+        
       }
       
     };
@@ -62,11 +69,19 @@ export default function Upload({ session }: { session: Session | null }) {
         const filePath = `${file.name}`
         setFileSize(file.size)
         setFileName(filePath)
-        setfileSelected(true)
-        const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
-        if (uploadError) {
-          throw uploadError
+        
+        if(file.size > 2097152){
+          alert("File is too big! Max File Size : 2 MB!");
+
         }
+        else{
+          setfileSelected(true)
+          const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
+          if (uploadError) {
+            throw uploadError
+          }
+        }
+        
         } catch (error) {
         alert('Error selecting file to upload!')
         } finally {

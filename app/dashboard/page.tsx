@@ -20,7 +20,7 @@ export default async function Page() {
   
 
     return (
-      <section className="bg-gray-900 h-screen text-white">
+      <section className="bg-gray-900 flex-col h-screen text-white">
             <div className="flex py-5 items-center justify-center">
               <div className="flex flex-row items-center space-x-4">
                 <h1
