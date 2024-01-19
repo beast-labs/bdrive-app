@@ -90,7 +90,7 @@ export default function Upload({ session }: { session: Session | null }) {
   return(
     <div>
       {uploading? (
-        <div className='flex items-center'>
+        <div className='flex justify-center items-center space-x-2'>
           <p>Uploading...</p>
           <span className="loader"></span>
         </div>
