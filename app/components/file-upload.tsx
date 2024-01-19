@@ -2,8 +2,6 @@
 import React, { useState } from 'react'
 import { Database } from '../../supabase'
 import {  Session,createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { prototype } from 'events'
-import { error } from 'console'
 type Files = Database['public']['Tables']['files']['Row']
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -92,7 +90,10 @@ export default function Upload({ session }: { session: Session | null }) {
   return(
     <div>
       {uploading? (
-        <div><p>Uploading...</p></div>
+        <div className='flex items-center'>
+          <p>Uploading...</p>
+          <span className="loader"></span>
+        </div>
         ) 
       :(
         <div className='flex items-center justify-center space-x-4'>
