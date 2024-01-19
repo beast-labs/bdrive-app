@@ -67,8 +67,8 @@ export default function Table({ session }: { session: Session | null }){
       }, [supabase,todos])
       
     return(
-        <div className="bg-transparent p-4 rounded-md inline-block flex w-full shadow">
-            <table className="table-auto w-full items-center rounded-md outline">
+        <div className="bg-transparent p-4 rounded-md inline-block flex w-full shadow justify-center">
+            <table className="table-auto w-4/5 items-center rounded-md outline">
                 <thead className='border-b-2 border-neutral-300'>
                     <tr>
                     <th>File Name</th>

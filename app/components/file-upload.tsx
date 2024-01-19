@@ -77,6 +77,7 @@ export default function Upload({ session }: { session: Session | null }) {
         else{
           setfileSelected(true)
           const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
+          setUploading(false)
           if (uploadError) {
             throw uploadError
           }
@@ -89,22 +90,29 @@ export default function Upload({ session }: { session: Session | null }) {
         }
     }
   return(
-    <div className='flex items-center justify-center space-x-4'>
-        <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
-            <span>Select a file</span>
-            <input id="file-upload" 
-              name="file-upload" 
-              type="file"
-              accept=".png, .jpg, .jpeg" 
-              className="sr-only" 
-              onChange={uploadFile}
-            />
-        </label>
-        <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3"
-        onClick={buttonHandler}>
-            <span>Upload</span>
-        </button>
-
+    <div>
+      {uploading? (
+        <div><p>Uploading...</p></div>
+        ) 
+      :(
+        <div className='flex items-center justify-center space-x-4'>
+          <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
+              <span>Select a file</span>
+              <input id="file-upload" 
+                name="file-upload" 
+                type="file"
+                accept=".png, .jpg, .jpeg" 
+                className="sr-only" 
+                onChange={uploadFile}
+              />
+            </label>
+            <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3"
+              onClick={buttonHandler}>
+              <span>Upload</span>
+            </button>
+          </div>
+      )}
     </div>
+    
   )
 }
