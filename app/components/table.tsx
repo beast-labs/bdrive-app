@@ -9,9 +9,11 @@ export default function Table({ session }: { session: Session | null }){
 
     const supabase = createClientComponentClient<Database>()
     const [todos, setTodos] = useState<Todos[]>([])
+    const [deleteFile, setdeleteFile] = useState(false)
 
     const deleteTodo  = async(file_id: number, file_name: string) => {
       try {
+        setdeleteFile(true)
         //remove from storage bucket
         await supabase
         .storage
@@ -22,9 +24,13 @@ export default function Table({ session }: { session: Session | null }){
           .from('todos')
           .delete()
           .eq('id', file_id )
+        
        
       } catch (error) {
         console.log('error', error)
+      }
+      finally{
+        setdeleteFile(false)
       }
     }
 
@@ -39,12 +45,22 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
+            {deleteFile?
+            (
+              <div className='flex justify-center items-center space-x-2 mt-1'>
+                <p>Deleting...</p>
+                <span className="small-loader"></span>
+              </div>
+              )
+            :
             <td>
               <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
                 <button id='download' type='submit'> Down</button>
               </form>
             </td>
+            }
+            
             
         </tr>
       );

@@ -102,7 +102,7 @@ export default function Upload({ session }: { session: Session | null }) {
               <input id="file-upload" 
                 name="file-upload" 
                 type="file"
-                accept=".png, .jpg, .jpeg" 
+                // accept=".png, .jpg, .jpeg" 
                 className="sr-only" 
                 onChange={uploadFile}
               />
