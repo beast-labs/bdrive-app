@@ -48,23 +48,6 @@ export default async function Page() {
                   
             </div>
             
-        </section>
-    // <main className="flex min-h-screen outline flex-col items-center justify-between p-16">
-    //   <div className="flex items-center outline justify-between p-16 ">
-    //     Welcome to Dashboard Page {session ? session.user.email:''}!
-    //   </div>
-    //   <div className="flex items-center outline justify-between p-5">
-    //   <form action="/auth/signout" method="post">
-    //       <button className="button p-2 bg-red-600 rounded-md text-white" type="submit">
-    //         Sign out
-    //       </button>
-    //     </form>
-    //   </div>
-      
-    //   <div className="flex items-center outline justify-between min-w-full"> <Table/></div>
-      
-    // </main>
-    
-    
+        </section>    
     )
   }
