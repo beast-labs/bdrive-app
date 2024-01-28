@@ -2,7 +2,6 @@
 import { Session, createClientComponentClient} from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { useEffect, useState } from 'react';
-import { list } from 'postcss';
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -42,7 +41,7 @@ export default function Table({ session }: { session: Session | null }){
       return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
    }
     const listFiles = todos.map(file =>
-        <tr className='bg-blur-sm text-center hover:bg-gray-100/10' key={file.user_id}>
+        <tr className='bg-blur-sm text-center text-white hover:bg-white/[0.1] border-b-2 border-neutral-100/30' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
@@ -73,7 +72,7 @@ export default function Table({ session }: { session: Session | null }){
       }, [supabase,todos])
       
     return(
-        <div className="backdrop-blur-sm bg-white/20 rounded-xl h-full w-full p-4 rounded-md inline-block flex flex-col mt-3 justify-center items-center">
+        <div className="backdrop-blur-sm rounded-xl h-full w-full p-4 rounded-md inline-block flex flex-col mt-3 justify-center">
           { deleteFile ? 
             <div className='w-full'>
               <table className="table-auto w-full items-center rounded-md">
@@ -93,15 +92,15 @@ export default function Table({ session }: { session: Session | null }){
             </div>
           :
             <table className="table-auto w-full items-center rounded-md">
-              <thead className='border-b-2 border-neutral-300'>
+              <thead className='border-b border-white rounded-md'>
                   <tr>
-                  <th>File Name</th>
-                  <th>Upload Date</th>
-                  <th>Size</th>
-                  <th>Actions</th>
+                  <th className='bg-purple-600/70 rounded-l-md'>File Name</th>
+                  <th className='bg-purple-600/70'>Upload Date</th>
+                  <th className='bg-purple-600/70'>Size</th>
+                  <th className='bg-purple-600/70 rounded-r-md'>Actions</th>
                   </tr>
               </thead>
-              <tbody>
+              <tbody className=''>
                 {listFiles}
               </tbody>
             </table>

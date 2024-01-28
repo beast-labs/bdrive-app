@@ -2,9 +2,7 @@ import Table from "../components/table";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { cookies } from 'next/headers'
-import { useState } from "react";
 import Upload from "../components/file-upload";
-import { useSession } from "@supabase/auth-helpers-react";
 
 
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
@@ -42,7 +40,7 @@ export default async function Page() {
               <div>
                  <Upload session={session}/>   
               </div> 
-              <div className="w-full">
+              <div className="w-11/12 text-neutral-300">
               <Table session={session}/> 
               </div>              
                   
