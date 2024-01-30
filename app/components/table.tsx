@@ -41,14 +41,14 @@ export default function Table({ session }: { session: Session | null }){
       return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
    }
     const listFiles = todos.map(file =>
-        <tr className='bg-blur-sm text-center text-white hover:bg-white/[0.1] border-b-2 border-neutral-100/30' key={file.user_id}>
+        <tr className='bg-blur-sm text-center text-zinc-400 transition ease hover:text-white hover:bg-purple-700/[0.1] duration-500 border-b-2 border-neutral-100/30' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
-            <td>
-              <button onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
+            <td className='overflow-auto'>
+              <button className='rounded-md ring-2 ring-purple-500/50 p-1' onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
-                <button id='download' type='submit'> Down</button>
+                <button id='download' type='submit' className='rounded-md ring-2 ring-purple-500/50 p-1'> Down</button>
               </form>
             </td>
         </tr>
@@ -91,13 +91,13 @@ export default function Table({ session }: { session: Session | null }){
               </div>
             </div>
           :
-            <table className="table-auto w-full items-center rounded-md">
-              <thead className='border-b border-white rounded-md'>
+            <table className="table-auto overflow-auto w-full items-center rounded-md">
+              <thead className='border-b border-white bg-purple-300/20'>
                   <tr>
-                  <th className='bg-purple-600/70 rounded-l-md'>File Name</th>
-                  <th className='bg-purple-600/70'>Upload Date</th>
-                  <th className='bg-purple-600/70'>Size</th>
-                  <th className='bg-purple-600/70 rounded-r-md'>Actions</th>
+                  <th className='text-purple-500 rounded-tl-lg'>File Name</th>
+                  <th className='text-purple-500'>Upload Date</th>
+                  <th className='text-purple-500'>Size</th>
+                  <th className='text-purple-500 rounded-tr-lg'>Actions</th>
                   </tr>
               </thead>
               <tbody className=''>

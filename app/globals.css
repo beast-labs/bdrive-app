@@ -27,8 +27,11 @@ body {
 }
 
 button:hover{
-    background-color: rgb(49, 148, 241);
-    color: aliceblue;
+  transition-property: background-color;
+  transition-timing-function: ease;
+  transition-duration: 250ms;
+  background-color: rgb(171, 65, 243);
+  color: aliceblue;
 }
 td{
   padding: 4px;
