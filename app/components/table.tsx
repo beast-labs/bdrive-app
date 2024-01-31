@@ -2,6 +2,7 @@
 import { Session, createClientComponentClient} from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { useEffect, useState } from 'react';
+import { GoDownload, GoTrash } from "react-icons/go";
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
@@ -45,10 +46,10 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
-            <td className='overflow-auto'>
-              <button className='rounded-md ring-2 ring-purple-500/50 p-1' onClick={e => deleteTodo(file.id, file.file_name)}> Delete</button>
+            <td className=' space-x-2 overflow-x w-1/4 align-center justify-center'>
+              <button className='rounded-md p-1' onClick={e => deleteTodo(file.id, file.file_name)}> <GoTrash className='sm:w-6 sm:h-6'/></button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
-                <button id='download' type='submit' className='rounded-md ring-2 ring-purple-500/50 p-1'> Down</button>
+                <button id='download' type='submit' className='rounded-md p-1'> <GoDownload className='w-5 sm:w-6 sm:h-6'/></button>
               </form>
             </td>
         </tr>
