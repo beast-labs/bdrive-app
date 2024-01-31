@@ -97,7 +97,7 @@ export default function Upload({ session }: { session: Session | null }) {
         ) 
       :(
         <div className='flex items-center justify-center space-x-4'>
-          <label className="relative cursor-pointer rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3">
+          <label className="relative cursor-pointer rounded-md font-semibold text-white outline hover:bg-purple-600 transition ease duration-300 p-3">
               <span>Select a file</span>
               <input id="file-upload" 
                 name="file-upload" 
@@ -107,7 +107,7 @@ export default function Upload({ session }: { session: Session | null }) {
                 onChange={uploadFile}
               />
             </label>
-            <button className="rounded-md bg-transparent font-semibold text-white outline hover:bg-white/[0.1] p-3"
+            <button className="rounded-md bg-transparent font-semibold text-white outline p-3"
               onClick={buttonHandler}>
               <span>Upload</span>
             </button>

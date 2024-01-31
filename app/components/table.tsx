@@ -46,8 +46,8 @@ export default function Table({ session }: { session: Session | null }){
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
-            <td className=' space-x-2 overflow-x w-1/4 align-center justify-center'>
-              <button className='rounded-md p-1' onClick={e => deleteTodo(file.id, file.file_name)}> <GoTrash className='sm:w-6 sm:h-6'/></button>
+            <td className='space-x-2 overflow-x w-1/4 align-center justify-center'>
+              <button className='rounded-md p-1 mt-1' onClick={e => deleteTodo(file.id, file.file_name)}> <GoTrash className='sm:w-6 sm:h-6'/></button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
                 <button id='download' type='submit' className='rounded-md p-1'> <GoDownload className='w-5 sm:w-6 sm:h-6'/></button>
               </form>
@@ -77,12 +77,12 @@ export default function Table({ session }: { session: Session | null }){
           { deleteFile ? 
             <div className='w-full'>
               <table className="table-auto w-full items-center rounded-md">
-              <thead className='border-b-2 border-neutral-300'>
+              <thead className='border-b border-white bg-purple-300/20'>
                   <tr>
-                  <th>File Name</th>
-                  <th>Upload Date</th>
-                  <th>Size</th>
-                  <th>Actions</th>
+                  <th className='text-purple-500 rounded-tl-lg'>File Name</th>
+                  <th className='text-purple-500'>Upload Date</th>
+                  <th className='text-purple-500'>Size</th>
+                  <th className='text-purple-500 rounded-tr-lg'>Actions</th>
                   </tr>
               </thead>
               </table>
