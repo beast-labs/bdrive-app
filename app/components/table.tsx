@@ -73,7 +73,7 @@ export default function Table({ session }: { session: Session | null }){
       }, [supabase,todos])
       
     return(
-        <div className="backdrop-blur-sm rounded-xl h-full w-full p-4 rounded-md inline-block flex flex-col mt-3 justify-center">
+        <div className="backdrop-blur-sm rounded-xl h-full w-full p-4 rounded-md inline-block flex flex-col justify-center">
           { deleteFile ? 
             <div className='w-full'>
               <table className="table-auto w-full items-center rounded-md">
