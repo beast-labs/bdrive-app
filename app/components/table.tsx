@@ -45,8 +45,8 @@ export default function Table({ session }: { session: Session | null }){
         <tr className='bg-blur-sm text-center text-zinc-400 transition ease hover:text-white hover:bg-purple-700/[0.1] duration-500 border-b-2 border-neutral-100/30' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
-            <td>{bytesToSize(file.file_size?file.file_size:0)}</td>
-            <td className='space-x-2 overflow-x w-1/4 align-center justify-center'>
+            <td className='w-1/6'>{bytesToSize(file.file_size?file.file_size:0)}</td>
+            <td className='overflow-x w-1/4 sm:w-1/5 align-center justify-center'>
               <button className='rounded-md p-1 mt-1' onClick={e => deleteTodo(file.id, file.file_name)}> <GoTrash className='sm:w-6 sm:h-6'/></button>
               <form action={"/api/download/"+file.file_name} method="get" className='inline'>              
                 <button id='download' type='submit' className='rounded-md p-1'> <GoDownload className='w-5 sm:w-6 sm:h-6'/></button>
