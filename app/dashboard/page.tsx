@@ -23,7 +23,7 @@ export default async function Page() {
             <div className="flex py-4 items-center justify-center">
               <div className="flex flex-row items-center space-x-4 shadow-lg shadow-purple-700/50 rounded-full p-2 outline outline-1 outline-gray-700">
                 <h1
-                    className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+                    className="px-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
                 >
                     Dashboard
                 </h1>
