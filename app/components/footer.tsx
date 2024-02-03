@@ -4,10 +4,10 @@ export default function Navbar() {
     
         {/* <!--Copyright section--> */}
         <div
-          className="p-4 text-center text-neutral-500 dark:bg-neutral-700 dark:text-neutral-200">
+          className="p-4 text-center text-neutral-400 dark:bg-neutral-700 dark:text-neutral-200">
           © 2023 Copyright:
           <a
-            className="dark:text-neutral-400"
+            className=""
             href="https://github.com/beast-labs/bdrive-app"
           >BDrive</a>
         </div>
