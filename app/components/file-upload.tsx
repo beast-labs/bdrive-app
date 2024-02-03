@@ -41,7 +41,7 @@ export default function Upload({ session }: { session: Session | null }) {
         let date = new Date().toLocaleDateString()
         const { data: todo, error } = await supabase
           .from('todos')
-          .insert({user_id: user.id, file_name: fileName, file_size: fileSize , inserted_at:date+" "+time})
+          .insert({user_id: user?.id, file_name: fileName, file_size: fileSize , inserted_at:date+" "+time})
           .select()
           .single()
   

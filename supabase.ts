@@ -41,21 +41,21 @@ export interface Database {
           task: string | null
           file_name: string
           file_size: number | null
-          user_id: string
+          user_id: string | undefined
         }
         Insert: {
           id?: number
           inserted_at?: string
           is_complete?: boolean | null
           task?: string | null
-          user_id: string
+          user_id: string | undefined
         }
         Update: {
           id?: number
           inserted_at?: string
           is_complete?: boolean | null
           task?: string | null
-          user_id?: string
+          user_id?: string | undefined
         }
         Relationships: [
           {
