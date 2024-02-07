@@ -22,6 +22,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/auth-form.tsx"],
+  "types": ["jest", "node"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/components/auth-form.tsx"
+  ],
   "exclude": ["node_modules"]
 }
