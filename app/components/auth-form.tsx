@@ -16,6 +16,7 @@ export default function AuthForm() {
           button: {  color: 'black' },
           anchor: { color: 'white' },
           input: {color:'white'},
+          label: {color:'white'}
           //..
         }
       }}
