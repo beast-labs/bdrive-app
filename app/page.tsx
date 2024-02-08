@@ -3,7 +3,7 @@ import AuthForm from './components/auth-form'
 
 export default function Home() {
   return (
-    <section className="bg-gray-900 text-white flex h-screen">
+    <section className="bg-gray-900 text-white flex h-full w-full">
             <div
                 className="flex-col mx-auto max-w-screen-xl px-4 py-16 lg:flex lg:items-center md:flex"
             >
@@ -19,7 +19,7 @@ export default function Home() {
                     Login to get started.
                 </p>
 
-                <div id='login' className="mt-8 flex justify-center h-full">
+                <div id='login' className="mt-8 justify-center">
                     <AuthForm/>
                 </div>
                 </div>
