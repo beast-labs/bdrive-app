@@ -20,7 +20,7 @@ export default function AuthForm() {
         }
       }}
       providers={['google']}
-      redirectTo="/auth/callback"
+      redirectTo="https://bdrive-reyb9iy8v-beast-labs.vercel.app/auth/callback"
     />
   )
 }
