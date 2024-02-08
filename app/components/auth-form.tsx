@@ -20,7 +20,7 @@ export default function AuthForm() {
         }
       }}
       providers={['google']}
-      redirectTo="https://bdrive-app-git-main-beast-labs.vercel.app/auth/callback"
+      redirectTo="http://localhost:3000/auth/callback"
     />
   )
 }
