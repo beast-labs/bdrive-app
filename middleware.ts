@@ -1,8 +1,5 @@
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
-import { data } from 'autoprefixer'
-import { NextResponse } from 'next/server'
-
-import type { NextRequest } from 'next/server'
+import { NextResponse,NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
