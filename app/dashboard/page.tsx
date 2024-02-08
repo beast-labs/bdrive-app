@@ -5,10 +5,10 @@ import { cookies } from 'next/headers'
 import Upload from "../components/file-upload";
 import Image from "next/image";
 
-
+export const dynamic = "force-dynamic";
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
 export default async function Page() {
-
+  
   const supabase = createServerComponentClient<Database>({ cookies })
 
   const {
