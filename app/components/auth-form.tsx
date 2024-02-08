@@ -20,7 +20,7 @@ export default function AuthForm() {
         }
       }}
       providers={['google']}
-      redirectTo="http://bdrive-app.vercel.app/auth/callback"
+      redirectTo="https://bdrive-app.vercel.app/auth/callback"
     />
   )
 }
