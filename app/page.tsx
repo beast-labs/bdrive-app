@@ -19,7 +19,7 @@ export default function Home() {
                     Login to get started.
                 </p>
 
-                <div id='login' className="mt-8 justify-center">
+                <div id='login' className="mt-8 justify-center h-screen">
                     <AuthForm/>
                 </div>
                 </div>
