@@ -17,7 +17,6 @@ export default function AuthForm() {
           anchor: { color: 'white' },
           input: {color:'white'},
           label: {color:'white'}
-          //..
         }
       }}
       providers={['google']}
