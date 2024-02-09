@@ -26,7 +26,7 @@ export default function Table({ session }: { session: Session | null }){
           .delete()
           .eq('id', file_id )
         
-       
+          setTodos(todos.filter((x) => x.id != file_id))
       } catch (error) {
         console.log('error', error)
       }
@@ -70,7 +70,7 @@ export default function Table({ session }: { session: Session | null }){
     
         fetchTodos()
         
-      }, [supabase,todos])
+      }, [supabase, todos])
       
     return(
         <div className="backdrop-blur-sm rounded-xl h-full w-full p-4 rounded-md inline-block flex flex-col justify-center">
