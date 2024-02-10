@@ -19,7 +19,7 @@ export default async function Page() {
   
 
     return (
-      <section className="bg-gray-900 flex-col text-white h-full w-full lg:h-screen md:h-screen sm:h-full">
+      <section className="bg-gray-900 flex-col text-white h-full w-full mx-auto">
             <div className="flex py-4 items-center justify-center">
               <div className="flex flex-row items-center space-x-4 shadow-lg shadow-purple-700/50 rounded-full p-2 outline outline-1 outline-gray-700">
                 <h1
@@ -45,7 +45,7 @@ export default async function Page() {
               <div>
                  <Upload session={session}/>   
               </div> 
-              <div className="flex w-11/12 text-neutral-300">
+              <div className="w-full h-full text-neutral-300">
               <Table session={session}/> 
               </div>              
                   
