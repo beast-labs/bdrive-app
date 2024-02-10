@@ -42,7 +42,7 @@ export default function Table({ session }: { session: Session | null }){
       return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
    }
     const listFiles = todos.map(file =>
-        <tr className='bg-blur-sm text-center text-zinc-400 transition ease hover:text-white hover:bg-purple-700/[0.1] duration-500 border-b-2 border-neutral-100/30' key={file.user_id}>
+        <tr className='bg-blur-sm w-full text-center text-zinc-400 transition ease hover:text-white hover:bg-purple-700/[0.1] duration-500 border-b-2 border-neutral-100/30' key={file.user_id}>
             <td>{file.file_name}</td>
             <td>{file.inserted_at}</td>
             <td className='w-1/6'>{bytesToSize(file.file_size?file.file_size:0)}</td>
