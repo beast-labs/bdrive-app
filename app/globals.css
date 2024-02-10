@@ -19,6 +19,7 @@
 body {
 
   background-color: #111827;
+  width: fit-content;
 }
 
 button:hover{
