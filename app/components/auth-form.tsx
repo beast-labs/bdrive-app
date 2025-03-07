@@ -26,7 +26,7 @@ export default function AuthForm() {
         }
       }}
       providers={['google']}
-      redirectTo="http://localhost:3000/auth/callback"
+      redirectTo="https://bdrive-app.vercel.app/auth/callback"
     />
     </motion.div>
     
