@@ -238,7 +238,7 @@ export default function Table({ session }: { session: Session | null }){
             </table>
           }
           {(todos.length==0)? <p> Get started by uploading files.</p>:<> Keep Uploading...</>}
-          <button
+          {/* <button
               onClick={() => showToast('Success! This is a toast message.', 'success')}
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
@@ -246,7 +246,7 @@ export default function Table({ session }: { session: Session | null }){
           </button>
           {toast.show && (
         <Toast message={toast.message} type={toast.type} onClose={closeToast} />
-      )}
+      )} */}
            
         </div>
       </motion.div> 
