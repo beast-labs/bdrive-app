@@ -2,7 +2,6 @@ import Table from "../components/table";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '../../supabase'
 import { cookies } from 'next/headers'
-import Upload from "../components/file-upload";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
