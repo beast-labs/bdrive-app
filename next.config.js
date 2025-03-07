@@ -6,7 +6,12 @@ const nextConfig = {images: {
         hostname: 'lh3.googleusercontent.com',
         port: '',
         pathname: '/a/*',
-      },
+      },{
+        protocol: 'https',
+        hostname: 'bdrive-app.vercel.app',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
   webpack: (config, { isServer }) => {
