@@ -1,29 +1,31 @@
 import Image from 'next/image'
 import AuthForm from './components/auth-form'
+import LoginForm from './components/login-form'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   return (
-    <section className="bg-gray-900 text-white flex h-full w-full">
+    <div className="bg-gray-900 text-white flex min-h-screen animated-gradient">
             <div
-                className="flex-col mx-auto max-w-screen-xl px-4 py-16 lg:flex lg:items-center md:flex"
+                className="flex-col mx-auto max-w-screen px-4 py-16 lg:flex lg:items-center md:flex"
             >
-                <div className="flex flex-col mx-auto text-center">
-                <h1
-                    className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent md:text-4xl sm:text-5xl"
-                >
-                    Welcome to BDrive!
-                </h1>
-
-                <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-                    A full-stack web application built using Next.js, TailwindCSS, and Supabase.
-                    Login to get started.
-                </p>
-
-                <div id='login' className="mt-8 justify-center h-screen">
-                    <AuthForm/>
-                </div>
+                <div className="mx-auto text-center">
+                        <h1
+                        className="bg-clip-text font-extrabold text-3xl md:text-5xl sm:text-4xl rounded-xl"
+                        >
+                            Welcome to BDrive!
+                        </h1>
+                    </div>
+                <div>
+                    <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+                        A full-stack web application built using Next.js, TailwindCSS, and Supabase.
+                        Login to get started.
+                    </p>
+                    <div className="flex items-center justify-center mt-6">
+                        <AuthForm/>   
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
   )
 }

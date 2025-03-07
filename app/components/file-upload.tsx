@@ -13,12 +13,12 @@ export default function Upload({ session }: { session: Session | null }) {
     const [fileName, setFileName] = useState("")
     const [fileSize, setFileSize] = useState(0)
     const [todos, setTodos] = useState<Todos[]>([])
+    const [file_obj, setFile] = React.useState<File>()
 
     const user = session?.user
 
-    const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      const button: HTMLButtonElement = event.currentTarget;
+    const uploadFile = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      
       if(!fileSelected){
         alert('no file is selected.')
       }
@@ -27,6 +27,12 @@ export default function Upload({ session }: { session: Session | null }) {
           alert("File is too big! Max File Size : 2 MB!")
         }
         else{
+          setUploading(true)
+          const { error: uploadError } = await supabase.storage.from('file_bucket').upload('public/'+fileName, file_obj)
+          setUploading(false)
+          if (uploadError) {
+            throw uploadError
+          }
           addTodo("Hello")
           setfileSelected(false)
         }
@@ -46,47 +52,86 @@ export default function Upload({ session }: { session: Session | null }) {
           .single()
   
         if (error) {
-          console.log(error.message)
+          setfileSelected(false)
+          console.log("Cannot Upload file to supabase :"+error.message)
+
         } else {
           setTodos([...todos, todo])
-          console.log(todo)
+          console.log(todos)
         }
       }
     }
     
-    const uploadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
-        try {
-        setUploading(true)
+    // const uploadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+    //     try {
+    //     setUploading(true)
 
-        if (!event.target.files || event.target.files.length === 0) {
-            throw new Error('You must select an image to upload.')
-        }
+    //     if (!event.target.files || event.target.files.length === 0) {
+    //         throw new Error('You must select an image to upload.')
+    //     }
         
-        const file = event.target.files[0]
-        const fileExt = file.name.split('.').pop()
-        const filePath = `${file.name}`
-        setFileSize(file.size)
-        setFileName(filePath)
+    //     const file = event.target.files[0]
+    //     const fileExt = file.name.split('.').pop()
+    //     const filePath = `${file.name}`
+    //     setFileSize(file.size)
+    //     setFileName(filePath)
         
-        if(file.size > 2097152){
-          alert("File is too big! Max File Size : 2 MB!");
+    //     if(file.size > 2097152){
+    //       alert("File is too big! Max File Size : 2 MB!");
 
-        }
-        else{
-          setfileSelected(true)
-          const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
-          setUploading(false)
-          if (uploadError) {
-            throw uploadError
-          }
-        }
+    //     }
+    //     else{
+    //       setfileSelected(true)
+    //       // const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
+    //       setUploading(false)
+    //       // if (uploadError) {
+    //       //   throw uploadError
+    //       // }
+    //     }
         
-        } catch (error) {
-        alert('Error selecting file to upload!')
-        } finally {
-        setUploading(false)
-        }
-    }
+    //     } catch (error) {
+    //     alert('Error selecting file to upload!')
+    //     setfileSelected(false)
+    //     } finally {
+    //     setUploading(false)
+    //     }
+    // }
+  
+    const selectFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+      try {
+      setUploading(false)
+
+      if (!event.target.files || event.target.files.length === 0) {
+          throw new Error('You must select an image to upload.')
+      }
+      
+      const file_obj = event.target.files[0]
+      const fileExt = file_obj.name.split('.').pop()
+      const filePath = `${file_obj.name}`
+      setFileSize(file_obj.size)
+      setFileName(filePath)
+      setFile(file_obj)
+      
+      if(file_obj.size > 2097152){
+        alert("File is too big! Max File Size : 2 MB!");
+
+      }
+      else{
+        setfileSelected(true)
+        // const { error: uploadError } = await supabase.storage.from('file_bucket').upload('public/'+filePath, file_obj)
+        // setUploading(false)
+        // if (uploadError) {
+        //   throw uploadError
+        // }
+      }
+      
+      } catch (error) {
+      alert('Error selecting file to upload!')
+      } finally {
+      setUploading(false)
+      }
+  }
+
   return(
     <div>
       {uploading? (
@@ -98,24 +143,29 @@ export default function Upload({ session }: { session: Session | null }) {
       :(
         <div className=''>
         <div className='flex items-center justify-center space-x-4'>
-          <label className="relative cursor-pointer rounded-full font-semibold text-white outline hover:bg-purple-600 transition ease duration-300 p-3">
+          {/* <label className="relative cursor-pointer rounded-full font-semibold text-white outline hover:bg-purple-600 transition ease duration-300 p-3">
               <span>Select a file</span>
               <input id="file-upload" 
                 name="file-upload" 
                 type="file"
                 // accept=".png, .jpg, .jpeg" 
                 className="sr-only" 
-                onChange={uploadFile}
+                // onChange={uploadFile}
+                onChange={selectFile}
               />
-            </label>
+            </label> */}
+            <input
+              type="file"
+              onChange={selectFile}
+            />
             <button className="rounded-full bg-transparent font-semibold text-white outline p-3"
-              onClick={buttonHandler}>
+              onClick={uploadFile}>
               <span>Upload</span>
             </button>
           </div>
-          <div className='text-center mt-2'>
+          {/* <div className='text-center mt-2'>
             {fileSelected ? <p> File Selected : {fileName}</p>:<p> No File Selected</p>}
-          </div>
+          </div> */}
           </div>
       )}
     </div>

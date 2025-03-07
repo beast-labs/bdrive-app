@@ -1,4 +1,5 @@
 import AuthForm from "../components/auth-form";
+import LoginForm from "../components/login-form";
 
 export default function Page() {
     return(
@@ -13,9 +14,12 @@ export default function Page() {
                     Login to get started.
                 </p>
             </div>
-            <div className="w-1/2 mx-auto mt-5">
+            {/* <div className="w-1/2 mx-auto mt-5">
 
                 <AuthForm/>
+            </div> */}
+            <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+                <LoginForm />   
             </div>
             
             
