@@ -12,7 +12,8 @@ export async function middleware(req: NextRequest) {
   // if user is signed in and the current path is / redirect the user to /account
   if (user && req.nextUrl.pathname === '/') {
     
-    // console.log(data)
+    console.log("Request URL : "+req.url)
+    console.log("Is user validated "+ user.email)
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
